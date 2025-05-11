@@ -10,13 +10,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      - name: Mark repository as safe
+        run: git config --global --add safe.directory '*'
       - name: Run Gemini Action
-        uses: strawgate/gemini-for-github@0.1.0
+        uses: strawgate/gemini-for-github@main
         with:
-          github_repository: ${{ github.repository }}
-          github_owner: ${{ github.repository_owner }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_pr_number: ${{ github.event.pull_request.number }}
           github_issue_number: ${{ github.event.issue.number }}
           user_question: ${{ github.event.comment.body }}
