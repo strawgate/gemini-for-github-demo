@@ -12,8 +12,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
       - name: Run Gemini Action
-        uses: strawgate/gemini-for-github@main
+        uses: strawgate/gemini-for-github@working
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
